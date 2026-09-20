@@ -23,7 +23,11 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run check
+      - name: Build and test
+        run: npm run check
+        env:
+          BASE_PATH: /${{ github.event.repository.name }}
+          SITE_URL: https://${{ github.repository_owner }}.github.io
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
         with:
